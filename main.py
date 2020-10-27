@@ -38,5 +38,5 @@ def home_screen():
     widget_list = all_children(main_screen)
     for item in widget_list:
         item.pack_forget()
-
-   
+    # add navigation
+    create_navigation()

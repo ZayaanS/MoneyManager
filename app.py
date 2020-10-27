@@ -124,6 +124,25 @@ def clear_register_fields():
     result = ""
 
 
+# create collections for new user
+def new_user_dbs(email):
+    # create user's income collection
+    income_table = str(email + "_Income")
+    database[income_table]
+    # create user's budget collection
+    budget_table = str(email + "_Budget")
+    database[budget_table]
+    # create user's expenses collection
+    expenses_table = str(email + "_Expenses")
+    database[expenses_table]
+    # create user's savings collection
+    savings_table = str(email + "_Savings")
+    database[savings_table]
+    # create user's balances collection
+    balances_table = str(email + "_Balances")
+    database[balances_table]
+
+
 # function to register user to database
 def register_user():
     # clear any existing registration info
@@ -142,12 +161,17 @@ def register_user():
     if result is None :
         # add user details to database
         collection.insert_one({"Name" : username_info, "Email" : email_info, "Password" : password_info})
+        # create collections for new user
+        new_user_dbs(email_info)
+        # return a list of all collections in database
+        print(database.list_collection_names())
         # set a label for showing success information on screen     
         registration_success.pack()
     else:
         print(result)
         # set a label for information on screen     
         Registration_fail.pack()
+    # clear register fields
     clear_register_fields()
     # create Login Button 
     login_button.pack()
