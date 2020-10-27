@@ -128,19 +128,24 @@ def clear_register_fields():
 def new_user_dbs(email):
     # create user's income collection
     income_table = str(email + "_Income")
-    database[income_table]
+    income_coll = database[income_table]
+    income_coll.insert_one({"ignore": 0})
     # create user's budget collection
     budget_table = str(email + "_Budget")
-    database[budget_table]
+    budget_coll = database[budget_table]
+    budget_coll.insert_one({"ignore": 0})
     # create user's expenses collection
     expenses_table = str(email + "_Expenses")
-    database[expenses_table]
+    expenses_coll = database[expenses_table]
+    expenses_coll.insert_one({"ignore": 0})
     # create user's savings collection
     savings_table = str(email + "_Savings")
-    database[savings_table]
+    savings_coll = database[savings_table]
+    savings_coll.insert_one({"ignore": 0})
     # create user's balances collection
     balances_table = str(email + "_Balances")
-    database[balances_table]
+    balances_coll = database[balances_table]
+    balances_coll.insert_one({"ignore": 0})
 
 
 # function to register user to database
@@ -177,6 +182,7 @@ def register_user():
     login_button.pack()
     for user in users:
         print(user)
+
 
 
 # define log in verfication function

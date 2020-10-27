@@ -8,6 +8,7 @@ global income_button
 global expenses_button
 global savings_button
 global main_screen
+global current_user
 
 main_screen = Tk()
 home_button = Button(main_screen, text="home", height="2", width="15", font=("Montserrat", 10))
@@ -40,3 +41,6 @@ def home_screen():
         item.pack_forget()
     # add navigation
     create_navigation()
+
+
+# ---------- adding new income document to user's income collection ----------
