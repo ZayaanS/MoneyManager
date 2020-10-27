@@ -43,7 +43,7 @@ def all_children (window) :
 # Main account screen function
 def main_account_screen():
     # set the configuration of GUI window 
-    main_screen.geometry("400x450")  
+    main_screen.geometry("800x700")  
     # set the title of GUI window
     main_screen.title("Account Login")
     # create a Form label 
@@ -193,7 +193,7 @@ def login_verification():
     for user in users:
         print(user)
 
-collection.delete_many({})
+
 # call the main_account_screen function
 main_account_screen()
 
