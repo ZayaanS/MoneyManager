@@ -188,11 +188,12 @@ def login_verification():
         return
     else:
         wrong_password.pack()
+    # get list of current users
+    users = collection.find({})
+    for user in users:
+        print(user)
 
-
-    
-
-
+collection.delete_many({})
 # call the main_account_screen function
 main_account_screen()
 
