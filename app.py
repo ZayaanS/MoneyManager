@@ -1,5 +1,6 @@
 import pymongo
 from tkinter import *
+from main import main_screen, all_children, home_screen
 
 
 __author__ = "Zayaan"
@@ -25,19 +26,6 @@ global Registration_fail
 global no_user
 global register_button
 global wrong_password
-
-
-# create a GUI window 
-main_screen = Tk()
-
-
-# Function to clear the window
-def all_children (window) :
-    _list = window.winfo_children()
-    for item in _list :
-        if item.winfo_children() :
-            _list.extend(item.winfo_children())
-    return _list
 
 
 # Main account screen function
@@ -185,6 +173,7 @@ def login_verification():
         return
     elif login_password == user["Password"]:
         print("Successfully logged in!")
+        home_screen()
         return
     else:
         wrong_password.pack()
