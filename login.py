@@ -2,8 +2,10 @@ from tkinter import *
 from gen import clear_window
 from home import create_home_screen
 
+current_user = ""
+
 # function to create start screen
-def create_start_screen(database, collection, screen):
+def create_start_screen(user, database, collection, screen):
     # set the configuration of GUI window 
     screen.geometry("800x700")  
     # set the title of GUI window
@@ -11,14 +13,14 @@ def create_start_screen(database, collection, screen):
     # create a Form label 
     Label(text="Money Manager", width="300", height="2", font=("Montserrat", 32)).pack() 
     # create Login Button 
-    Button(text="Login", height="2", width="30", font=("Montserrat", 10), command = lambda: create_login_screen(database, collection, screen)).pack() 
+    Button(text="Login", height="2", width="30", font=("Montserrat", 10), command = lambda: create_login_screen(user, database, collection, screen)).pack() 
     # create a register button
     Button(text="Register", height="2", width="30", font=("Montserrat", 10), command = lambda: create_register_screen(database, collection, screen)).pack()
     # start the GUI
     screen.mainloop()
 
 # function to create login screen
-def create_login_screen(database, collection, screen):
+def create_login_screen(user, database, collection, screen):
     # variables
     global email_verify
     global password_verify
@@ -38,7 +40,7 @@ def create_login_screen(database, collection, screen):
     password__login_entry = Entry(screen, textvariable = password_verify, show= '*')
     password__login_entry.pack()
     Label(screen, text="").pack()
-    Button(screen, text="Login", width=10, height=1, command = lambda: login_verification(database, collection, screen)).pack()
+    Button(screen, text="Login", width=10, height=1, command = lambda: login_verification(user, database, collection, screen)).pack()
 
 # create register screen
 def create_register_screen(database, collection, screen):
@@ -79,7 +81,7 @@ def create_register_screen(database, collection, screen):
     password_entry.pack()   
     Label(screen, text="").pack()   
     # Set register button
-    Button(screen, text="Register", width=10, height=1, command = lambda: register_user(database, collection, screen)).pack()
+    Button(screen, text="Register", width=10, height=1, command = lambda: register_user(user, database, collection, screen)).pack()
 
 # function to clear fields after registering a new user
 def clear_register_fields():
@@ -92,12 +94,12 @@ def clear_register_fields():
     result = ""
 
 # function to register user to database
-def register_user(database, collection, screen):
+def register_user(user, database, collection, screen):
     #variables 
     global login_button
     global registration_success
     global registration_fail
-    login_button = Button(text="Login", height="2", width="30", font=("Montserrat", 10), command = lambda: create_login_screen(database, collection, screen))
+    login_button = Button(text="Login", height="2", width="30", font=("Montserrat", 10), command = lambda: create_login_screen(user, database, collection, screen))
     registration_success = Label(screen, text="Registration Success", fg="green", font=("Montserrat", 10))
     registration_fail = Label(screen, text="There is already an existing account linked to this email address", fg="red", font=("Montserrat", 10))
     # clear any existing registration info
@@ -161,7 +163,7 @@ def new_user_dbs(database, email):
     balances_coll.insert_one({"Email" : email, "Category" : "", "Amount": 0 })
 
 # function to log user in
-def login_verification(database, collection, screen):
+def login_verification(user, database, collection, screen):
     #variables
     no_user = Label(screen, text="No user with this email exists", fg="red", font=("Montserrat", 10))
     register_button = Button(text="Register", height="2", width="30", font=("Montserrat", 10), command = lambda: create_register_screen(database, collection, screen))
@@ -173,6 +175,8 @@ def login_verification(database, collection, screen):
     # get entries from login screen
     login_email = str(email_verify.get())
     login_password = str(password_verify.get())
+    global current_user
+    current_user = login_email
     # search database to find if email exists
     user = database["Users"].find_one({"Email" : login_email})
     # if user does not exist add message
@@ -182,7 +186,8 @@ def login_verification(database, collection, screen):
         return
     elif login_password == user["Password"]:
         print("Successfully logged in!")
-        create_home_screen(screen)
+        create_home_screen(user, database, screen)
+        print("Current user is : ", current_user)
         return
     else:
         wrong_password.pack()

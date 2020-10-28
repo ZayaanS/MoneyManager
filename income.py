@@ -1,11 +1,15 @@
 from tkinter import *
 
 # function to create income screen
-def create_income_screen(screen):
+def create_income_screen(user, database, screen):
     # variables
     global new_title
     global new_category
     global new_amount
+    global collection_name
+    global incomes
+    collection_name = user["Email"] + "_Income"
+    incomes = database[collection_name].find({})
     new_title = StringVar()
     new_category = StringVar()
     new_amount = DoubleVar()
@@ -22,7 +26,7 @@ def create_income_screen(screen):
     new_category_entry.grid(row=5, column=2)
     new_amount_entry = Entry(screen, textvariable = new_amount)
     new_amount_entry.grid(row=5, column=3)
-    add_income_button = Button(screen, text="Add", height="2", width="15", font=("Montserrat", 10))
+    add_income_button = Button(screen, text="Add", height="2", width="15", font=("Montserrat", 10), command = lambda : add_new_income(user, database, screen))
     add_income_button.grid(row=5, column=4)
     # table to display current income values
     Label(text="Existing incomes", font=("Montserrat", 14)).grid(row=6, columnspan=4) 
@@ -32,11 +36,17 @@ def add_new_income(user, database, screen):
     # get entry details
     new_title_info = new_title.get()
     new_category_info = new_category.get()
-    new_amount_info = new_amount.get()
-    collection_name = user + "_Income"
-    database[collection_name].insert_one({"Email" : user, "Title" : new_title_info, "Category" : new_category_info, "Amount" : new_amount_info})
-    incomes = database[collection_name].find({})
+    new_amount_info = new_amount.get() 
+    database[collection_name].insert_one({"Email" : user["Email"], "Title" : new_title_info, "Category" : new_category_info, "Amount" : new_amount_info})
+    show_income_table()
+
+# function to display table 
+def show_income_table():
+    n = 0
     for income in incomes:
-        print(income)
+        n = n + 1
+        Label(text = income["Title"] , font=("Montserrat", 10)).pack()
+        Label(text = income["Category"] , font=("Montserrat", 10)).pack()
+        Label(text = income["Amount"] , font=("Montserrat", 10)).pack()
 
 
