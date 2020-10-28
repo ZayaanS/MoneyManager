@@ -44,9 +44,9 @@ def add_new_income(user, database, screen):
 def show_income_table():
     n = 0
     for income in incomes:
-        n = n + 1
-        Label(text = income["Title"] , font=("Montserrat", 10)).pack()
-        Label(text = income["Category"] , font=("Montserrat", 10)).pack()
-        Label(text = income["Amount"] , font=("Montserrat", 10)).pack()
+        n = int(n + 1)
+        Label(text = income["Title"] , font=("Montserrat", 10)).grid(row=int(8+n), column=1) 
+        Label(text = income["Category"] , font=("Montserrat", 10)).grid(row=int(8+n), column=2) 
+        Label(text = income["Amount"] , font=("Montserrat", 10)).grid(row=int(8+n), column=3) 
 
 
