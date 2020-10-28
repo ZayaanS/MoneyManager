@@ -11,7 +11,7 @@ def create_start_screen(database, collection, screen):
     # create a Form label 
     Label(text="Money Manager", width="300", height="2", font=("Montserrat", 32)).pack() 
     # create Login Button 
-    Button(text="Login", height="2", width="30", font=("Montserrat", 10), command = create_login_screen(database, collection, screen)).pack() 
+    Button(text="Login", height="2", width="30", font=("Montserrat", 10), command = lambda: create_login_screen(database, collection, screen)).pack() 
     # create a register button
     Button(text="Register", height="2", width="30", font=("Montserrat", 10), command = lambda: create_register_screen(database, collection, screen)).pack()
     # start the GUI
