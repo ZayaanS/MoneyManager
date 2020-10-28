@@ -2,24 +2,8 @@ from tkinter import *
 from gen import clear_window
 from home import create_home_screen
 
-# set global variables
-global username
-global password
-global email
-global email_verify
-global password_verify
-global login_button
-
-# Set variables
-username = StringVar()
-password = StringVar()
-email = StringVar()
-email_verify = StringVar()
-password_verify = StringVar()
-login_button = Button(text="Login", height="2", width="30", font=("Montserrat", 10), command = create_login_screen)
-
 # function to create start screen
-def create_start_screen(screen):
+def create_start_screen(database, collection, screen):
     # set the configuration of GUI window 
     screen.geometry("800x700")  
     # set the title of GUI window
@@ -27,14 +11,20 @@ def create_start_screen(screen):
     # create a Form label 
     Label(text="Money Manager", width="300", height="2", font=("Montserrat", 32)).pack() 
     # create Login Button 
-    Button(text="Login", height="2", width="30", font=("Montserrat", 10), command = create_login_screen).pack() 
+    Button(text="Login", height="2", width="30", font=("Montserrat", 10), command = create_login_screen(database, collection, screen)).pack() 
     # create a register button
-    Button(text="Register", height="2", width="30", font=("Montserrat", 10), command = create_register_screen).pack()
+    Button(text="Register", height="2", width="30", font=("Montserrat", 10), command = lambda: create_register_screen(database, collection, screen)).pack()
     # start the GUI
     screen.mainloop()
 
 # function to create login screen
-def create_login_screen(screen):
+def create_login_screen(database, collection, screen):
+    # variables
+    global email_verify
+    global password_verify
+    email_verify = StringVar()
+    password_verify = StringVar()
+    # clear window
     clear_window(screen)
     # create login screen
     screen.title("Login")
@@ -48,10 +38,18 @@ def create_login_screen(screen):
     password__login_entry = Entry(screen, textvariable = password_verify, show= '*')
     password__login_entry.pack()
     Label(screen, text="").pack()
-    Button(screen, text="Login", width=10, height=1, command = login_verification).pack()
+    Button(screen, text="Login", width=10, height=1, command = lambda: login_verification(database, collection, screen)).pack()
 
 # create register screen
-def create_register_screen(screen):
+def create_register_screen(database, collection, screen):
+    # variables
+    global username
+    global password
+    global email
+    username = StringVar()
+    password = StringVar()
+    email = StringVar()
+    # clear window
     clear_window(screen)
     # set the title of GUI window
     screen.title("Account Register")
@@ -81,7 +79,7 @@ def create_register_screen(screen):
     password_entry.pack()   
     Label(screen, text="").pack()   
     # Set register button
-    Button(screen, text="Register", width=10, height=1, command = register_user).pack()
+    Button(screen, text="Register", width=10, height=1, command = lambda: register_user(database, collection, screen)).pack()
 
 # function to clear fields after registering a new user
 def clear_register_fields():
@@ -96,8 +94,10 @@ def clear_register_fields():
 # function to register user to database
 def register_user(database, collection, screen):
     #variables 
+    global login_button
     global registration_success
     global registration_fail
+    login_button = Button(text="Login", height="2", width="30", font=("Montserrat", 10), command = lambda: create_login_screen(database, collection, screen))
     registration_success = Label(screen, text="Registration Success", fg="green", font=("Montserrat", 10))
     registration_fail = Label(screen, text="There is already an existing account linked to this email address", fg="red", font=("Montserrat", 10))
     # clear any existing registration info
@@ -164,7 +164,7 @@ def new_user_dbs(database, email):
 def login_verification(database, collection, screen):
     #variables
     no_user = Label(screen, text="No user with this email exists", fg="red", font=("Montserrat", 10))
-    register_button = Button(text="Register", height="2", width="30", font=("Montserrat", 10), command = create_register_screen)
+    register_button = Button(text="Register", height="2", width="30", font=("Montserrat", 10), command = lambda: create_register_screen(database, collection, screen))
     wrong_password = Label(screen, text="Incorrect password", fg="red", font=("Montserrat", 10))
     # clear any existing extras
     no_user.pack_forget()

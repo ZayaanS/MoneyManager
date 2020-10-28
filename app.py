@@ -12,5 +12,5 @@ collection = database['Users']
 main_screen = Tk()
 
 # create start screen
-create_start_screen(main_screen)
+create_start_screen(database, collection, main_screen)
 
