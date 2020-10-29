@@ -1,6 +1,5 @@
 import pymongo
 from tkinter import *
-from tkinter import ttk
 from login import *
 
 __author__ = "Zayaan"

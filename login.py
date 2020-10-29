@@ -187,7 +187,7 @@ def login_verification(user, database, collection, screen):
         return
     elif login_password == user["Password"]:
         print("Successfully logged in!")
-        create_home_screen(user, database, screen)
+        create_home_screen(user, database, collection, screen)
         print("Current user is : ", current_user)
         return
     else:
