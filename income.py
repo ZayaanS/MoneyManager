@@ -38,10 +38,11 @@ def add_new_income(user, database, screen):
     new_category_info = new_category.get()
     new_amount_info = new_amount.get() 
     database[collection_name].insert_one({"Email" : user["Email"], "Title" : new_title_info, "Category" : new_category_info, "Amount" : new_amount_info})
-    show_income_table()
+    show_income_table(screen)
 
 # function to display table 
-def show_income_table():
+def show_income_table(screen):
+    print("displaying income")
     n = 0
     for income in incomes:
         n = int(n + 1)

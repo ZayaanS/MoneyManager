@@ -15,7 +15,7 @@ def create_start_screen(user, database, collection, screen):
     # create Login Button 
     Button(text="Login", height="2", width="30", font=("Montserrat", 10), command = lambda: create_login_screen(user, database, collection, screen)).pack() 
     # create a register button
-    Button(text="Register", height="2", width="30", font=("Montserrat", 10), command = lambda: create_register_screen(database, collection, screen)).pack()
+    Button(text="Register", height="2", width="30", font=("Montserrat", 10), command = lambda: create_register_screen(user, database, collection, screen)).pack()
     # start the GUI
     screen.mainloop()
 
@@ -43,7 +43,7 @@ def create_login_screen(user, database, collection, screen):
     Button(screen, text="Login", width=10, height=1, command = lambda: login_verification(user, database, collection, screen)).pack()
 
 # create register screen
-def create_register_screen(database, collection, screen):
+def create_register_screen(user, database, collection, screen):
     # variables
     global username
     global password
@@ -166,7 +166,7 @@ def new_user_dbs(database, email):
 def login_verification(user, database, collection, screen):
     #variables
     no_user = Label(screen, text="No user with this email exists", fg="red", font=("Montserrat", 10))
-    register_button = Button(text="Register", height="2", width="30", font=("Montserrat", 10), command = lambda: create_register_screen(database, collection, screen))
+    register_button = Button(text="Register", height="2", width="30", font=("Montserrat", 10), command = lambda: create_register_screen(user, database, collection, screen))
     wrong_password = Label(screen, text="Incorrect password", fg="red", font=("Montserrat", 10))
     # clear any existing extras
     no_user.pack_forget()
