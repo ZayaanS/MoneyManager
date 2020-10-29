@@ -18,8 +18,8 @@ def create_navigation(user, database, screen):
     expenses_button = Button(screen, text="expenses", height="2", width="15", font=("Montserrat", 10), command = lambda : show_expenses_screen(user, database, screen))
     savings_button = Button(screen, text="savings", height="2", width="15", font=("Montserrat", 10), command = lambda : show_savings_screen(user, database, screen))
     home_button.grid(row=1, column=0)
-    budget_button.grid(row=1, column=1)
-    income_button.grid(row=1, column=2)
+    budget_button.grid(row=1, column=2)
+    income_button.grid(row=1, column=1)
     expenses_button.grid(row=1, column=3)
     savings_button.grid(row=1, column=4)
 
