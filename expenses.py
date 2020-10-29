@@ -14,7 +14,7 @@ def create_expenses_screen(user, database, screen):
     new_category = StringVar()
     new_amount = DoubleVar()
     # create heading label
-    Label(text="Your Expensess", font=("Montserrat", 16)).grid(row=2, columnspan=4) 
+    Label(text="Your Expenses", font=("Montserrat", 16)).grid(row=2, columnspan=4) 
     # create input field for new expenses
     Label(text="Add new expense", font=("Montserrat", 14)).grid(row=3, columnspan=4) 
     Label(text="Title", font=("Montserrat", 12)).grid(row=4, column=1)
@@ -30,6 +30,7 @@ def create_expenses_screen(user, database, screen):
     add_expense_button.grid(row=5, column=4)
     # table to display current expense values
     Label(text="Existing expenses", font=("Montserrat", 14)).grid(row=6, columnspan=4) 
+    show_expense_table(screen)
 
 # function to add new expense to database
 def add_new_expense(user, database, screen):

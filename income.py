@@ -30,6 +30,7 @@ def create_income_screen(user, database, screen):
     add_income_button.grid(row=5, column=4)
     # table to display current income values
     Label(text="Existing incomes", font=("Montserrat", 14)).grid(row=6, columnspan=4) 
+    show_income_table(screen)
 
 # function to add new income to database
 def add_new_income(user, database, screen):

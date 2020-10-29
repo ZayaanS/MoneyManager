@@ -18,6 +18,7 @@ def create_start_screen(user, database, collection, screen):
     Button(text="Register", height="2", width="30", font=("Montserrat", 10), command = lambda: create_register_screen(user, database, collection, screen)).pack()
     # start the GUI
     screen.mainloop()
+    
 
 # function to create login screen
 def create_login_screen(user, database, collection, screen):

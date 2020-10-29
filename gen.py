@@ -13,3 +13,4 @@ def clear_window(screen):
     widget_list = all_children(screen)
     for item in widget_list:
         item.pack_forget()
+        item.grid_forget()

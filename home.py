@@ -2,6 +2,8 @@ from tkinter import *
 from gen import clear_window
 from income import create_income_screen
 from expenses import create_expenses_screen
+from budget import create_budget_screen
+from savings import create_savings_screen
 
 # function to create navigation buttons
 def create_navigation(user, database, screen):
@@ -11,10 +13,10 @@ def create_navigation(user, database, screen):
     global expenses_button
     global savings_button
     home_button = Button(screen, text="home", height="2", width="15", font=("Montserrat", 10), command = lambda : create_home_screen(user, database, screen))
-    budget_button = Button(screen, text="budget", height="2", width="15", font=("Montserrat", 10))
+    budget_button = Button(screen, text="budget", height="2", width="15", font=("Montserrat", 10), command = lambda : show_budget_screen(user, database, screen))
     income_button = Button(screen, text="income", height="2", width="15", font=("Montserrat", 10), command = lambda : show_income_screen(user, database, screen))
     expenses_button = Button(screen, text="expenses", height="2", width="15", font=("Montserrat", 10), command = lambda : show_expenses_screen(user, database, screen))
-    savings_button = Button(screen, text="savings", height="2", width="15", font=("Montserrat", 10))
+    savings_button = Button(screen, text="savings", height="2", width="15", font=("Montserrat", 10), command = lambda : show_savings_screen(user, database, screen))
     home_button.grid(row=1, column=0)
     budget_button.grid(row=1, column=1)
     income_button.grid(row=1, column=2)
@@ -37,5 +39,17 @@ def show_expenses_screen(user, database, screen):
     clear_window(screen)
     create_navigation(user, database, screen)
     create_expenses_screen(user, database, screen)
+
+# function to show budget screen
+def show_budget_screen(user, database, screen):
+    clear_window(screen)
+    create_navigation(user, database, screen)
+    create_budget_screen(user, database, screen)
+
+# function to show savings screen
+def show_savings_screen(user, database, screen):
+    clear_window(screen)
+    create_navigation(user, database, screen)
+    create_savings_screen(user, database, screen)
 
 
