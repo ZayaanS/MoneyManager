@@ -36,6 +36,7 @@ def create_income_screen(user, database, screen):
     Label(text="Existing incomes", font=("Montserrat", 14)).grid(row=8, columnspan=4) 
     show_income_table(screen)
 
+
 # function to add new income to database
 def add_new_income(user, database, screen):
     # get entry details
@@ -59,9 +60,13 @@ def show_income_table(screen):
     # display total income
     Label(text="Total Income", font=("Montserrat", 14)).grid(row=3, columnspan=4) 
     Label(text=total_income, font=("Montserrat", 14)).grid(row=4, columnspan=4) 
-    get_total_income()
 
 # function to get total income
-def get_total_income():
-    print(total_income)
-    return total_income
+def get_total_income(user, database):
+    collection_name = user["Email"] + "_Income"
+    incomes = database[collection_name].find({})
+    total = 0
+    for i in incomes:
+        total = float(total) + float (i["Amount"])
+    return total
+

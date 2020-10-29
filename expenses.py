@@ -58,9 +58,12 @@ def show_expense_table(screen):
     # display total expenses
     Label(text="Total Expenses", font=("Montserrat", 14)).grid(row=3, columnspan=4) 
     Label(text=total_expenses, font=("Montserrat", 14)).grid(row=4, columnspan=4) 
-    get_total_expenses()
 
 # function to get total expenses
-def get_total_expenses():
-    print(total_expenses)
-    return total_expenses
+def get_total_expenses(user, database):
+    collection_name = user["Email"] + "_Expenses"
+    expenses = database[collection_name].find({})
+    total = 0
+    for i in expenses:
+        total = float(total) + float (i["Amount"])
+    return total
