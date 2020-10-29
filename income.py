@@ -1,5 +1,8 @@
 from tkinter import *
 
+global total_income
+total_income = 0
+
 # function to create income screen
 def create_income_screen(user, database, screen):
     # variables
@@ -57,4 +60,6 @@ def show_income_table(screen):
     Label(text="Total Income", font=("Montserrat", 14)).grid(row=3, columnspan=4) 
     Label(text=total_income, font=("Montserrat", 14)).grid(row=4, columnspan=4) 
 
-
+# function to get total income
+def get_total_income():
+    return total_income

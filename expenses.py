@@ -1,5 +1,8 @@
 from tkinter import *
 
+global total_expenses
+total_expenses = 0
+
 # function to create expenses screen
 def create_expenses_screen(user, database, screen):
     # variables
@@ -56,3 +59,6 @@ def show_expense_table(screen):
     Label(text="Total Expenses", font=("Montserrat", 14)).grid(row=3, columnspan=4) 
     Label(text=total_expenses, font=("Montserrat", 14)).grid(row=4, columnspan=4) 
 
+# function to get total expenses
+def get_total_expenses():
+    return total_expenses

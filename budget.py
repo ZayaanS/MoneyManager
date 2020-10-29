@@ -1,5 +1,7 @@
 from tkinter import *
 
+global total_budget
+
 # function to create budget screen
 def create_budget_screen(user, database, screen):
     # variables
