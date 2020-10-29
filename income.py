@@ -59,7 +59,9 @@ def show_income_table(screen):
     # display total income
     Label(text="Total Income", font=("Montserrat", 14)).grid(row=3, columnspan=4) 
     Label(text=total_income, font=("Montserrat", 14)).grid(row=4, columnspan=4) 
+    get_total_income()
 
 # function to get total income
 def get_total_income():
+    print(total_income)
     return total_income

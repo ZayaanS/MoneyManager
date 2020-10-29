@@ -58,7 +58,9 @@ def show_savings_table(screen):
     # display total savings
     Label(text="Total Savings", font=("Montserrat", 14)).grid(row=3, columnspan=4) 
     Label(text=total_savings, font=("Montserrat", 14)).grid(row=4, columnspan=4) 
+    get_total_savings()
 
 # function to get total savings
 def get_total_savings():
+    print(total_savings)
     return total_savings

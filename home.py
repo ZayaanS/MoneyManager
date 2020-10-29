@@ -26,8 +26,11 @@ def create_navigation(user, database, screen):
 # function to create home screen
 def create_home_screen(user, database, screen):
     show_income_screen(user, database, screen)
+    get_total_income()
     show_expenses_screen(user, database, screen)
+    get_total_expenses()
     show_savings_screen(user, database, screen)
+    get_total_savings()
     clear_window(screen)
     create_navigation(user, database, screen)
     Label(text="Money Manager", font=("Montserrat", 32)).grid(row=2, columnspan=4) 
